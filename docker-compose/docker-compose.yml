@@ -1,0 +1,17 @@
+version: "3"
+
+services:
+  gitlab-ce:
+    labels:
+      - 'traefik.frontend.rule=Host:git.w3serv.net'
+      - "traefik.port=80"
+      - "traefik.frontend.entryPoints=http"
+    ports:
+      - 80
+    container_name: gitlab
+    restart: always
+    volumes:
+      - '/srv/gitlab/config:/etc/gitlab'
+      - '/srv/gitlab/logs:/var/log/gitlab'
+      - '/srv/gitlab/data:/var/opt/gitlab'
+    image: 'gitlab/gitlab-ce:latest'
